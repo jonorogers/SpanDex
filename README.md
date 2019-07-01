@@ -1,12 +1,12 @@
 # SpanDex
 
-[![Build Status](https://travis-ci.org/jonorogers/SpanDex.svg?branch=master)](https://travis-ci.org/jonorogers/SpanDex)
+[![Build Status](https://travis-ci.org/jonorogers/SpanDex.svg?branch=master)](https://travis-ci.org/jonorogers/SpanDex)[![nuget](https://img.shields.io/nuget/v/SpanDex.svg)](https://www.nuget.org/packages/SpanDex/)
 
 Utilities to read/write primitives from/to spans easily. Uses the C# Span struct.
 
 ## Getting Started
 
-Install the [Nuget Package](https://www.placeholder.com)
+Install the [Nuget Package](https://www.nuget.org/packages/SpanDex)
 
 ### Motivation
 
