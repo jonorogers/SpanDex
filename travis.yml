@@ -1,9 +1,0 @@
-language: csharp
-mono: none
-sudo: required
-dist: bionic
-dotnet: 2.2.105
-script:
- - dotnet restore
- - dotnet build
- - dotnet test SpanDex.Tests/SpanDex.Tests.csproj

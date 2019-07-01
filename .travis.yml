@@ -1,7 +1,8 @@
 language: csharp
 mono: none
-dotnet: 2.0.0
-dist: trusty
+dist: bionic
+dotnet: 2.2.105
 script:
- - cd SpanDex.Tests
- - dotnet test
+ - dotnet restore
+ - dotnet build
+ - dotnet test SpanDex.Tests/SpanDex.Tests.csproj
