@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.1-alpha</Version>
+    <Authors>Jono Rogers</Authors>
+    <Company />
+    <Description>Utilities to read/write primitives from/to spans easily</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>span spanreader spanwriter binaryprimitives</PackageTags>
+    <PackageProjectUrl>https://github.com/jonorogers/SpanDex</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/jonorogers/SpanDex</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Memory" Version="4.5.3" />
+  </ItemGroup>
+
+</Project>
