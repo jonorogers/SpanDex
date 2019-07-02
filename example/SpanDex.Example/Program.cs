@@ -23,14 +23,14 @@ namespace SpanDex.Example {
             writer.WriteInt16BigEndian(-31_971);
             writer.WriteInt32BigEndian(-1_598_468_598);
             writer.WriteInt64BigEndian(-7_223_372_036_854_775_808);
-            writer.WriteASCIIString(testString);
+            writer.WriteAsciiString(testString);
 
 
             var reader = new SpanReader(writer.Span);
             Console.WriteLine(reader.ReadInt16BigEndian());
             Console.WriteLine(reader.ReadInt32BigEndian());
             Console.WriteLine(reader.ReadInt64BigEndian());
-            Console.WriteLine(reader.ReadASCIIString(testString.Length));
+            Console.WriteLine(reader.ReadAsciiString(testString.Length));
 
             Console.ReadKey();
         }

@@ -49,10 +49,10 @@ namespace SpanDex {
             }
             return false;
         }
-        internal static bool TryWriteASCIIString(Span<byte> destination, string value, ref int cursor) {
+        internal static bool TryWriteAsciiString(Span<byte> destination, string value, ref int cursor) {
             return TryWriteSpan(destination, Encoding.ASCII.GetBytes(value), ref cursor);
         }
-        internal static bool TryWriteUTF8String(Span<byte> destination, string value, ref int cursor) {
+        internal static bool TryWriteUtf8String(Span<byte> destination, string value, ref int cursor) {
             return TryWriteSpan(destination, Encoding.UTF8.GetBytes(value), ref cursor);
         }
         internal static void WriteInt16BigEndian(Span<byte> destination, short value, ref int cursor) {
@@ -95,10 +95,10 @@ namespace SpanDex {
             value.CopyTo(destination.Slice(cursor, value.Length));
             cursor += value.Length;
         }
-        internal static void WriteASCIIString(Span<byte> destination, string value, ref int cursor) {
+        internal static void WriteAsciiString(Span<byte> destination, string value, ref int cursor) {
             WriteSpan(destination, Encoding.ASCII.GetBytes(value), ref cursor);
         }
-        internal static void WriteUTF8String(Span<byte> destination, string value, ref int cursor) {
+        internal static void WriteUtf8String(Span<byte> destination, string value, ref int cursor) {
             WriteSpan(destination, Encoding.UTF8.GetBytes(value), ref cursor);
         }
 

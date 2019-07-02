@@ -29,8 +29,8 @@ namespace SpanDex {
         [CLSCompliant(false)]
         public ulong ReadUInt64LittleEndian() => memory.Span.ReadUInt64LittleEndian(ref cursor);
         public ReadOnlySpan<byte> ReadSpan(int size) => memory.Span.ReadSpan(size, ref cursor);
-        public string ReadASCIIString(int size) => memory.Span.ReadASCIIString(size, ref cursor);
-        public string ReadUTF8string(int size) => memory.Span.ReadUTF8String(size, ref cursor);
+        public string ReadAsciiString(int size) => memory.Span.ReadAsciiString(size, ref cursor);
+        public string ReadUtf8string(int size) => memory.Span.ReadUtf8String(size, ref cursor);
         public bool TryReadInt16BigEndian(out short value) => memory.Span.TryReadInt16BigEndian(out value, ref cursor);
         public bool TryReadInt16LittleEndian(out short value) => memory.Span.TryReadInt16LittleEndian(out value, ref cursor);
         public bool TryReadInt32BigEndian(out int value) => memory.Span.TryReadInt32BigEndian(out value, ref cursor);
@@ -50,7 +50,7 @@ namespace SpanDex {
         [CLSCompliant(false)]
         public bool TryReadUInt64LittleEndian(out ulong value) => memory.Span.TryReadUInt64LittleEndian(out value, ref cursor);
         public bool TryReadSpan(out ReadOnlySpan<byte> value, int size) => memory.Span.TryReadSpan(out value, size, ref cursor);
-        public bool TryReadASCIIString(out string value, int size) => memory.Span.TryReadASCIIString(out value, size, ref cursor);
-        public bool TryReadUTF8string(out string value, int size) => memory.Span.TryReadUTF8String(out value, size, ref cursor);
+        public bool TryReadAsciiString(out string value, int size) => memory.Span.TryReadAsciiString(out value, size, ref cursor);
+        public bool TryReadUtf8string(out string value, int size) => memory.Span.TryReadUtf8String(out value, size, ref cursor);
     }
 }

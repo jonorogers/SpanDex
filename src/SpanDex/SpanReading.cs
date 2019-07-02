@@ -44,11 +44,11 @@ namespace SpanDex {
         internal static ReadOnlySpan<byte> ReadSpan(ReadOnlySpan<byte> source, int size, ref int cursor) {
             return source.SliceAndAdvance(ref cursor, size);
         }
-        internal static string ReadASCIIString(ReadOnlySpan<byte> source, int size, ref int cursor) {
+        internal static string ReadAsciiString(ReadOnlySpan<byte> source, int size, ref int cursor) {
             var slice = ReadSpan(source, size, ref cursor);
             return Encoding.ASCII.GetString(slice.ToArray());
         }
-        internal static string ReadUTF8String(ReadOnlySpan<byte> source, int size, ref int cursor) {
+        internal static string ReadUtf8String(ReadOnlySpan<byte> source, int size, ref int cursor) {
             var slice = ReadSpan(source, size, ref cursor);
             return Encoding.UTF8.GetString(slice.ToArray());
         }
@@ -97,18 +97,18 @@ namespace SpanDex {
             }
             return false;
         }
-        internal static bool TryReadASCIIString(ReadOnlySpan<byte> source, out string value, int size, ref int cursor) {
+        internal static bool TryReadAsciiString(ReadOnlySpan<byte> source, out string value, int size, ref int cursor) {
             value = string.Empty;
             if (source.HasSpace(size + cursor)) {
-                value = ReadASCIIString(source, size, ref cursor);
+                value = ReadAsciiString(source, size, ref cursor);
                 return true;
             }
             return false;
         }
-        internal static bool TryReadUTF8String(ReadOnlySpan<byte> source, out string value, int size, ref int cursor) {
+        internal static bool TryReadUtf8String(ReadOnlySpan<byte> source, out string value, int size, ref int cursor) {
             value = string.Empty;
             if (source.HasSpace(size + cursor)) {
-                value = ReadUTF8String(source, size, ref cursor);
+                value = ReadUtf8String(source, size, ref cursor);
                 return true;
             }
             return false;

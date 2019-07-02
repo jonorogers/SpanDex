@@ -37,8 +37,8 @@ namespace SpanDex {
         [CLSCompliant(false)]
         public bool TryWriteUInt64LittleEndian(ulong value) => memory.Span.TryWriteUInt64LittleEndian(value, ref cursor);
         public bool TryWriteSpan(ReadOnlySpan<byte> value) => memory.Span.TryWriteSpan(value, ref cursor);
-        public bool TryWriteASCIIString(string value) => memory.Span.TryWriteASCIIString(value, ref cursor);
-        public bool TryWriteUTF8String(string value) => memory.Span.TryWriteUTF8String(value, ref cursor);
+        public bool TryWriteAsciiString(string value) => memory.Span.TryWriteAsciiString(value, ref cursor);
+        public bool TryWriteUtf8String(string value) => memory.Span.TryWriteUtf8String(value, ref cursor);
         public void WriteInt16BigEndian(short value) => memory.Span.WriteInt16BigEndian(value, ref cursor);
         public void WriteInt16LittleEndian(short value) => memory.Span.WriteInt16LittleEndian(value, ref cursor);
         public void WriteInt32BigEndian(int value) => memory.Span.WriteInt32BigEndian(value, ref cursor);
@@ -58,8 +58,8 @@ namespace SpanDex {
         [CLSCompliant(false)]
         public void WriteUInt64LittleEndian(ulong value) => memory.Span.WriteUInt64LittleEndian(value, ref cursor);
         public void WriteSpan(ReadOnlySpan<byte> value) => memory.Span.WriteSpan(value, ref cursor);
-        public void WriteASCIIString(string value) => memory.Span.WriteASCIIString(value, ref cursor);
-        public void WriteUTF8String(string value) => memory.Span.WriteUTF8String(value, ref cursor);
+        public void WriteAsciiString(string value) => memory.Span.WriteAsciiString(value, ref cursor);
+        public void WriteUtf8String(string value) => memory.Span.WriteUtf8String(value, ref cursor);
 
     }
 }

@@ -3,7 +3,6 @@
 namespace SpanDex.Extensions {
     public static class SpanExtensions {
 
-
         public static short ReadInt16BigEndian(this ReadOnlySpan<byte> source, ref int cursor) => SpanReading.ReadInt16BigEndian(source, ref cursor);
         public static short ReadInt16LittleEndian(this ReadOnlySpan<byte> source, ref int cursor) => SpanReading.ReadInt16LittleEndian(source, ref cursor);
         public static int ReadInt32BigEndian(this ReadOnlySpan<byte> source, ref int cursor) => SpanReading.ReadInt32BigEndian(source, ref cursor);
@@ -23,8 +22,8 @@ namespace SpanDex.Extensions {
         [CLSCompliant(false)]
         public static ulong ReadUInt64LittleEndian(this ReadOnlySpan<byte> source, ref int cursor) => SpanReading.ReadUInt64LittleEndian(source, ref cursor);
         public static ReadOnlySpan<byte> ReadSpan(this ReadOnlySpan<byte> source, int size, ref int cursor) => SpanReading.ReadSpan(source, size, ref cursor);
-        public static string ReadASCIIString(this ReadOnlySpan<byte> source, int size, ref int cursor) => SpanReading.ReadASCIIString(source, size, ref cursor);
-        public static string ReadUTF8String(this ReadOnlySpan<byte> source, int size, ref int cursor) => SpanReading.ReadUTF8String(source, size, ref cursor);
+        public static string ReadAsciiString(this ReadOnlySpan<byte> source, int size, ref int cursor) => SpanReading.ReadAsciiString(source, size, ref cursor);
+        public static string ReadUtf8String(this ReadOnlySpan<byte> source, int size, ref int cursor) => SpanReading.ReadUtf8String(source, size, ref cursor);
         public static bool TryReadInt16BigEndian(this ReadOnlySpan<byte> source, out short value, ref int cursor) => SpanReading.TryReadInt16BigEndian(source, out value, ref cursor);
         public static bool TryReadInt16LittleEndian(this ReadOnlySpan<byte> source, out short value, ref int cursor) => SpanReading.TryReadInt16LittleEndian(source, out value, ref cursor);
         public static bool TryReadInt32BigEndian(this ReadOnlySpan<byte> source, out int value, ref int cursor) => SpanReading.TryReadInt32BigEndian(source, out value, ref cursor);
@@ -44,8 +43,8 @@ namespace SpanDex.Extensions {
         [CLSCompliant(false)]
         public static bool TryReadUInt64LittleEndian(this ReadOnlySpan<byte> source, out ulong value, ref int cursor) => SpanReading.TryReadUInt64LittleEndian(source, out value, ref cursor);
         public static bool TryReadSpan(this ReadOnlySpan<byte> source, out ReadOnlySpan<byte> value, int size, ref int cursor) => SpanReading.TryReadSpan(source, out value, size, ref cursor);
-        public static bool TryReadASCIIString(this ReadOnlySpan<byte> source, out string value, int size, ref int cursor) => SpanReading.TryReadASCIIString(source, out value, size, ref cursor);
-        public static bool TryReadUTF8String(this ReadOnlySpan<byte> source, out string value, int size, ref int cursor) => SpanReading.TryReadUTF8String(source, out value, size, ref cursor);
+        public static bool TryReadAsciiString(this ReadOnlySpan<byte> source, out string value, int size, ref int cursor) => SpanReading.TryReadAsciiString(source, out value, size, ref cursor);
+        public static bool TryReadUtf8String(this ReadOnlySpan<byte> source, out string value, int size, ref int cursor) => SpanReading.TryReadUtf8String(source, out value, size, ref cursor);
         public static short ReadInt16BigEndian(this Span<byte> source, ref int cursor) => SpanReading.ReadInt16BigEndian(source, ref cursor);
         public static short ReadInt16LittleEndian(this Span<byte> source, ref int cursor) => SpanReading.ReadInt16LittleEndian(source, ref cursor);
         public static int ReadInt32BigEndian(this Span<byte> source, ref int cursor) => SpanReading.ReadInt32BigEndian(source, ref cursor);
@@ -65,8 +64,8 @@ namespace SpanDex.Extensions {
         [CLSCompliant(false)]
         public static ulong ReadUInt64LittleEndian(this Span<byte> source, ref int cursor) => SpanReading.ReadUInt64LittleEndian(source, ref cursor);
         public static ReadOnlySpan<byte> ReadSpan(this Span<byte> source, int size, ref int cursor) => SpanReading.ReadSpan(source, size, ref cursor);
-        public static string ReadASCIIString(this Span<byte> source, int size, ref int cursor) => SpanReading.ReadASCIIString(source, size, ref cursor);
-        public static string ReadUTF8String(this Span<byte> source, int size, ref int cursor) => SpanReading.ReadUTF8String(source, size, ref cursor);
+        public static string ReadAsciiString(this Span<byte> source, int size, ref int cursor) => SpanReading.ReadAsciiString(source, size, ref cursor);
+        public static string ReadUtf8String(this Span<byte> source, int size, ref int cursor) => SpanReading.ReadUtf8String(source, size, ref cursor);
         public static bool TryReadInt16BigEndian(this Span<byte> source, out short value, ref int cursor) => SpanReading.TryReadInt16BigEndian(source, out value, ref cursor);
         public static bool TryReadInt16LittleEndian(this Span<byte> source, out short value, ref int cursor) => SpanReading.TryReadInt16LittleEndian(source, out value, ref cursor);
         public static bool TryReadInt32BigEndian(this Span<byte> source, out int value, ref int cursor) => SpanReading.TryReadInt32BigEndian(source, out value, ref cursor);
@@ -86,8 +85,8 @@ namespace SpanDex.Extensions {
         [CLSCompliant(false)]
         public static bool TryReadUInt64LittleEndian(this Span<byte> source, out ulong value, ref int cursor) => SpanReading.TryReadUInt64LittleEndian(source, out value, ref cursor);
         public static bool TryReadSpan(this Span<byte> source, out ReadOnlySpan<byte> value, int size, ref int cursor) => SpanReading.TryReadSpan(source, out value, size, ref cursor);
-        public static bool TryReadASCIIString(this Span<byte> source, out string value, int size, ref int cursor) => SpanReading.TryReadASCIIString(source, out value, size, ref cursor);
-        public static bool TryReadUTF8String(this Span<byte> source, out string value, int size, ref int cursor) => SpanReading.TryReadUTF8String(source, out value, size, ref cursor);
+        public static bool TryReadAsciiString(this Span<byte> source, out string value, int size, ref int cursor) => SpanReading.TryReadAsciiString(source, out value, size, ref cursor);
+        public static bool TryReadUtf8String(this Span<byte> source, out string value, int size, ref int cursor) => SpanReading.TryReadUtf8String(source, out value, size, ref cursor);
 
 
 
@@ -111,8 +110,8 @@ namespace SpanDex.Extensions {
         [CLSCompliant(false)]
         public static bool TryWriteUInt64LittleEndian(this Span<byte> destination, ulong value, ref int cursor) => SpanWriting.TryWriteUInt64LittleEndian(destination, value, ref cursor);
         public static bool TryWriteSpan(this Span<byte> destination, ReadOnlySpan<byte> value, ref int cursor) => SpanWriting.TryWriteSpan(destination, value, ref cursor);
-        public static bool TryWriteASCIIString(this Span<byte> destination, string value, ref int cursor) => SpanWriting.TryWriteASCIIString(destination, value, ref cursor);
-        public static bool TryWriteUTF8String(this Span<byte> destination, string value, ref int cursor) => SpanWriting.TryWriteUTF8String(destination, value, ref cursor);
+        public static bool TryWriteAsciiString(this Span<byte> destination, string value, ref int cursor) => SpanWriting.TryWriteAsciiString(destination, value, ref cursor);
+        public static bool TryWriteUtf8String(this Span<byte> destination, string value, ref int cursor) => SpanWriting.TryWriteUtf8String(destination, value, ref cursor);
         public static void WriteInt16BigEndian(this Span<byte> destination, short value, ref int cursor) => SpanWriting.WriteInt16BigEndian(destination, value, ref cursor);
         public static void WriteInt16LittleEndian(this Span<byte> destination, short value, ref int cursor) => SpanWriting.WriteInt16LittleEndian(destination, value, ref cursor);
         public static void WriteInt32BigEndian(this Span<byte> destination, int value, ref int cursor) => SpanWriting.WriteInt32BigEndian(destination, value, ref cursor);
@@ -132,7 +131,7 @@ namespace SpanDex.Extensions {
         [CLSCompliant(false)]
         public static void WriteUInt64LittleEndian(this Span<byte> destination, ulong value, ref int cursor) => SpanWriting.WriteUInt64LittleEndian(destination, value, ref cursor);
         public static void WriteSpan(this Span<byte> destination, ReadOnlySpan<byte> value, ref int cursor) => SpanWriting.WriteSpan(destination, value, ref cursor);
-        public static void WriteASCIIString(this Span<byte> destination, string value, ref int cursor) => SpanWriting.WriteASCIIString(destination, value, ref cursor);
-        public static void WriteUTF8String(this Span<byte> destination, string value, ref int cursor) => SpanWriting.WriteUTF8String(destination, value, ref cursor);
+        public static void WriteAsciiString(this Span<byte> destination, string value, ref int cursor) => SpanWriting.WriteAsciiString(destination, value, ref cursor);
+        public static void WriteUtf8String(this Span<byte> destination, string value, ref int cursor) => SpanWriting.WriteUtf8String(destination, value, ref cursor);
     }
 }

@@ -95,21 +95,21 @@ namespace SpanDex.Tests {
             CollectionAssert.AreEqual(span.ToArray(), value.ToArray());
         }
         [TestMethod]
-        public void ReadASCIIString_ReadsCorrectly() {
+        public void ReadAsciiString_ReadsCorrectly() {
             var testString = "A little more than one hundred days into the fortieth year of her confinement, Dajeil Gelian was visited in her lonely tower overlooking the sea by an avatar of the great ship that was her home.";
             var bytes = Encoding.ASCII.GetBytes(testString);
             ReadOnlySpan<byte> span = bytes;
-            var value = span.ReadASCIIString(testString.Length, ref cursor);
+            var value = span.ReadAsciiString(testString.Length, ref cursor);
 
             Assert.AreEqual(testString, value);
             Assert.AreEqual(testString.Length, cursor);
         }
         [TestMethod]
-        public void ReadUTF8String_ReadsCorrectly() {
+        public void ReadUtf8String_ReadsCorrectly() {
             var testString = "A little more than one hundred days into the fortieth year of her confinement, Dajeil Gelian was visited in her lonely tower overlooking the sea by an avatar of the great ship that was her home.";
             var bytes = Encoding.UTF8.GetBytes(testString);
             ReadOnlySpan<byte> span = bytes;
-            var value = span.ReadUTF8String(testString.Length, ref cursor);
+            var value = span.ReadUtf8String(testString.Length, ref cursor);
 
             Assert.AreEqual(testString, value);
             Assert.AreEqual(testString.Length, cursor);
@@ -234,12 +234,12 @@ namespace SpanDex.Tests {
             }
         }
         [TestMethod]
-        public void TryReadASCIIString_ReadsCorrectly() {
+        public void TryReadAsciiString_ReadsCorrectly() {
             var testString = "A little more than one hundred days into the fortieth year of her confinement, Dajeil Gelian was visited in her lonely tower overlooking the sea by an avatar of the great ship that was her home.";
             var bytes = Encoding.ASCII.GetBytes(testString);
             ReadOnlySpan<byte> span = bytes;
 
-            if(span.TryReadASCIIString(out var value, testString.Length, ref cursor)) {
+            if(span.TryReadAsciiString(out var value, testString.Length, ref cursor)) {
                 Assert.AreEqual(testString, value);
                 Assert.AreEqual(testString.Length, cursor);
             } else {
@@ -248,11 +248,11 @@ namespace SpanDex.Tests {
 
         }
         [TestMethod]
-        public void TryReadUTF8String_ReadsCorrectly() {
+        public void TryReadUtf8String_ReadsCorrectly() {
             var testString = "A little more than one hundred days into the fortieth year of her confinement, Dajeil Gelian was visited in her lonely tower overlooking the sea by an avatar of the great ship that was her home.";
             var bytes = Encoding.UTF8.GetBytes(testString);
             ReadOnlySpan<byte> span = bytes;
-            if(span.TryReadUTF8String(out var value, testString.Length, ref cursor)) {
+            if(span.TryReadUtf8String(out var value, testString.Length, ref cursor)) {
 
                 Assert.AreEqual(testString, value);
                 Assert.AreEqual(testString.Length, cursor);
@@ -400,10 +400,10 @@ namespace SpanDex.Tests {
 
         }
         [TestMethod]
-        public void TryWriteASCIIString_WritesCorrectly() {
+        public void TryWriteAsciiString_WritesCorrectly() {
             Span<byte> span = new byte[11];
             var toWrite = "test string";
-            var succeeded = span.TryWriteASCIIString(toWrite, ref cursor);
+            var succeeded = span.TryWriteAsciiString(toWrite, ref cursor);
 
             var encodingArray = Encoding.ASCII.GetBytes(toWrite);
 
@@ -412,10 +412,10 @@ namespace SpanDex.Tests {
             CollectionAssert.AreEqual(encodingArray, span.ToArray());
         }
         [TestMethod]
-        public void TryWriteUTF8String_WritesCorrectly() {
+        public void TryWriteUtf8String_WritesCorrectly() {
             Span<byte> span = new byte[11];
             var toWrite = "test string";
-            var succeeded = span.TryWriteUTF8String(toWrite, ref cursor);
+            var succeeded = span.TryWriteUtf8String(toWrite, ref cursor);
             var encodingArray = Encoding.UTF8.GetBytes(toWrite);
 
             Assert.IsTrue(succeeded);
@@ -541,12 +541,12 @@ namespace SpanDex.Tests {
             CollectionAssert.AreEqual(toWrite, span.ToArray());
         }
         [TestMethod]
-        public void WriteASCIIString_WritesCorrectly() {
+        public void WriteAsciiString_WritesCorrectly() {
             Span<byte> span = new byte[11];
             var toWrite = "test string";
             var encodingArray = Encoding.ASCII.GetBytes(toWrite);
 
-            span.WriteASCIIString(toWrite, ref cursor);
+            span.WriteAsciiString(toWrite, ref cursor);
 
             Assert.AreEqual(toWrite.Length, cursor);
             CollectionAssert.AreEqual(encodingArray, span.ToArray());
@@ -557,7 +557,7 @@ namespace SpanDex.Tests {
             var toWrite = "test string";
             var encodingArray = Encoding.UTF8.GetBytes(toWrite);
 
-            span.WriteUTF8String(toWrite, ref cursor);
+            span.WriteUtf8String(toWrite, ref cursor);
 
             Assert.AreEqual(toWrite.Length, cursor);
             CollectionAssert.AreEqual(encodingArray, span.ToArray());
