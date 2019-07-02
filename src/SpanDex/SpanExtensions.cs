@@ -1,7 +1,5 @@
 ﻿using System;
 
-[assembly: CLSCompliant(true)]
-
 namespace SpanDex.Extensions {
     public static class SpanExtensions {
 
