@@ -50,6 +50,7 @@ namespace SpanDex {
         public ReadOnlySpan<byte> ReadSpan(int size) => span.ReadSpan(size, ref cursor);
         public string ReadAsciiString(int size) => span.ReadAsciiString(size, ref cursor);
         public string ReadUtf8string(int size) => span.ReadUtf8String(size, ref cursor);
+        public byte ReadByte() => span.ReadByte(ref cursor);
         public bool TryReadInt16BigEndian(out short value) => span.TryReadInt16BigEndian(out value, ref cursor);
         public bool TryReadInt16LittleEndian(out short value) => span.TryReadInt16LittleEndian(out value, ref cursor);
         public bool TryReadInt32BigEndian(out int value) => span.TryReadInt32BigEndian(out value, ref cursor);
@@ -71,5 +72,6 @@ namespace SpanDex {
         public bool TryReadSpan(out ReadOnlySpan<byte> value, int size) => span.TryReadSpan(out value, size, ref cursor);
         public bool TryReadAsciiString(out string value, int size) => span.TryReadAsciiString(out value, size, ref cursor);
         public bool TryReadUtf8string(out string value, int size) => span.TryReadUtf8String(out value, size, ref cursor);
+        public bool TryReadByte(out byte value) => span.TryReadByte(out value, ref cursor);
     }
 }

@@ -46,7 +46,7 @@ namespace SpanDex {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
 
-            if (destination.HasSpace(value.Length + cursor)) {
+            if (destination.HasSpace(cursor + value.Length)) {
                 WriteSpan(destination, value, ref cursor);
                 return true;
             }
@@ -63,6 +63,13 @@ namespace SpanDex {
                 throw new ArgumentNullException(nameof(value));
 
             return TryWriteSpan(destination, Encoding.UTF8.GetBytes(value), ref cursor);
+        }
+        internal static bool TryWriteByte(Span<byte> destination, byte value, ref int cursor) {
+            if(destination.HasSpace(cursor + 1)) {
+                WriteByte(destination, value, ref cursor);
+                return true;
+            }
+            return false;
         }
         internal static void WriteInt16BigEndian(Span<byte> destination, short value, ref int cursor) {
             BinaryPrimitives.WriteInt16BigEndian(destination.SliceAndAdvance(ref cursor, 2), value);
@@ -118,6 +125,10 @@ namespace SpanDex {
                 throw new ArgumentNullException(nameof(value));
 
             WriteSpan(destination, Encoding.UTF8.GetBytes(value), ref cursor);
+        }
+        internal static void WriteByte(Span<byte> destination, byte value, ref int cursor) {
+            destination[cursor] = value;
+            IncrementCursor(ref cursor, 1);
         }
 
         private static Span<byte> SliceAndAdvance(this Span<byte> source, ref int cursor, int size) {

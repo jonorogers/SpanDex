@@ -93,6 +93,7 @@ namespace SpanDex {
         public bool TryWriteSpan(ReadOnlySpan<byte> value) => Span.TryWriteSpan(value, ref cursor);
         public bool TryWriteAsciiString(string value) => Span.TryWriteAsciiString(value, ref cursor);
         public bool TryWriteUtf8String(string value) => Span.TryWriteUtf8String(value, ref cursor);
+        public bool TryWriteByte(byte value) => Span.TryWriteByte(value, ref cursor);
         public void WriteInt16BigEndian(short value) => Span.WriteInt16BigEndian(value, ref cursor);
         public void WriteInt16LittleEndian(short value) => Span.WriteInt16LittleEndian(value, ref cursor);
         public void WriteInt32BigEndian(int value) => Span.WriteInt32BigEndian(value, ref cursor);
@@ -114,6 +115,6 @@ namespace SpanDex {
         public void WriteSpan(ReadOnlySpan<byte> value) => Span.WriteSpan(value, ref cursor);
         public void WriteAsciiString(string value) => Span.WriteAsciiString(value, ref cursor);
         public void WriteUtf8String(string value) => Span.WriteUtf8String(value, ref cursor);
-
+        public void WriteByte(byte value) => Span.WriteByte(value, ref cursor);
     }
 }

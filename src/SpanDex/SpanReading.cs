@@ -52,6 +52,11 @@ namespace SpanDex {
             var slice = ReadSpan(source, size, ref cursor);
             return Encoding.UTF8.GetString(slice.ToArray());
         }
+        internal static byte ReadByte(ReadOnlySpan<byte> source, ref int cursor) {
+            var bite = source[cursor];
+            IncrementCursor(ref cursor, 1);
+            return bite;
+        }
         internal static bool TryReadInt16BigEndian(ReadOnlySpan<byte> source, out short value, ref int cursor) {
             return TryAdvance(BinaryPrimitives.TryReadInt16BigEndian(source.Slice(cursor, 2), out value), ref cursor, 2);
         }
@@ -89,25 +94,33 @@ namespace SpanDex {
             return TryAdvance(BinaryPrimitives.TryReadUInt64LittleEndian(source.Slice(cursor, 8), out value), ref cursor, 8);
         }
         internal static bool TryReadSpan(ReadOnlySpan<byte> source, out ReadOnlySpan<byte> span, int size, ref int cursor) {
-            span = null;
-            if (source.HasSpace(size + cursor)) {
+            span = default;
+            if (source.HasSpace(cursor + size)) {
                 span = ReadSpan(source, size, ref cursor);
                 return true;
             }
             return false;
         }
         internal static bool TryReadAsciiString(ReadOnlySpan<byte> source, out string value, int size, ref int cursor) {
-            value = string.Empty;
-            if (source.HasSpace(size + cursor)) {
+            value = default;
+            if (source.HasSpace(cursor + size)) {
                 value = ReadAsciiString(source, size, ref cursor);
                 return true;
             }
             return false;
         }
         internal static bool TryReadUtf8String(ReadOnlySpan<byte> source, out string value, int size, ref int cursor) {
-            value = string.Empty;
-            if (source.HasSpace(size + cursor)) {
+            value = default;
+            if (source.HasSpace(cursor + size)) {
                 value = ReadUtf8String(source, size, ref cursor);
+                return true;
+            }
+            return false;
+        }
+        internal static bool TryReadByte(ReadOnlySpan<byte> source, out byte value, ref int cursor) {
+            value = default;
+            if(source.HasSpace(cursor + 1)) {
+                value = ReadByte(source, ref cursor);
                 return true;
             }
             return false;

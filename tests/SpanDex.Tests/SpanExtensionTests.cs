@@ -123,6 +123,13 @@ namespace SpanDex.Tests {
             Assert.AreEqual(testString.Length, cursor);
         }
         [TestMethod]
+        public void ReadByte_ReadsCorrectly() {
+            ReadOnlySpan<byte> span = new byte[1] { 253 };
+            var value = span.ReadByte(ref cursor);
+
+            Assert.AreEqual(253, value);
+        }
+        [TestMethod]
 
         public void TryReadInt16BigEndian_ReadsCorrectly() {
             var span = GetSpan((short)-31_971, Endianness.Big);
@@ -264,6 +271,16 @@ namespace SpanDex.Tests {
 
                 Assert.AreEqual(testString, value);
                 Assert.AreEqual(testString.Length, cursor);
+            } else {
+                Assert.Fail();
+            }
+        }
+        [TestMethod]
+        public void TryReadByte_ReadsCorrectly() {
+            ReadOnlySpan<byte> span = new byte[1] { 253 };
+            if(span.TryReadByte(out var value, ref cursor)) {
+                Assert.AreEqual(253, value);
+                Assert.AreEqual(1, cursor);
             } else {
                 Assert.Fail();
             }
@@ -429,6 +446,16 @@ namespace SpanDex.Tests {
             Assert.IsTrue(succeeded);
             Assert.AreEqual(toWrite.Length, cursor);
             CollectionAssert.AreEqual(encodingArray, span.ToArray());
+        }
+        [TestMethod]
+        public void TryWriteByte_WritesCorrectly() {
+            Span<byte> span = new byte[1];
+            byte toWrite = 234;
+            var succeeded = span.TryWriteByte(toWrite, ref cursor);
+            
+            Assert.IsTrue(succeeded);
+            Assert.AreEqual(1, cursor);
+            Assert.AreEqual(toWrite, span[0]);
         }
         [TestMethod]
         public void WriteInt16BigEndian_WritesCorrectly() {
@@ -597,7 +624,15 @@ namespace SpanDex.Tests {
             Assert.AreEqual(toWrite.Length, cursor);
             CollectionAssert.AreEqual(encodingArray, span.ToArray());
         }
+        [TestMethod]
+        public void WriteByte_WritesCorrectly() {
+            Span<byte> span = new byte[1];
+            byte toWrite = 234;
+            span.WriteByte(toWrite, ref cursor);
 
+            Assert.AreEqual(1, cursor);
+            Assert.AreEqual(toWrite, span[0]);
+        }
 
         private ReadOnlySpan<byte> GetSpan(short value, Endianness endian) => CreateSpan(BitConverter.GetBytes(value), endian);
         private ReadOnlySpan<byte> GetSpan(ushort value, Endianness endian) => CreateSpan(BitConverter.GetBytes(value), endian);
