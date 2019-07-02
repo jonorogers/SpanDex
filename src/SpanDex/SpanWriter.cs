@@ -23,6 +23,12 @@ namespace SpanDex {
 
         public byte[] ToArray() => memory.ToArray();
         public ReadOnlySpan<byte> ToReadOnlySpan() => new ReadOnlySpan<byte>(ToArray());
+        public void Advance(int length) {
+            if (length <= 0)
+                throw new ArgumentException("Length must be a non-negative integer");
+
+            cursor = checked(cursor + length);
+        }
 
         public bool TryWriteInt16BigEndian(short value) => memory.Span.TryWriteInt16BigEndian(value, ref cursor);
         public bool TryWriteInt16LittleEndian(short value) => memory.Span.TryWriteInt16LittleEndian(value, ref cursor);
