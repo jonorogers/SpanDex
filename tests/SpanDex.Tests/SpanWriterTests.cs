@@ -24,5 +24,11 @@ namespace SpanDex.Tests {
             spanWriter = span;
             Assert.AreEqual(span.Length, spanWriter.Length);
         }
+
+        [TestMethod]
+        public void CreateFromSpan_WithCursor_InitializesCorrectly() {
+            SpanWriter writer = new SpanWriter(new byte[20], 10);
+            Assert.AreEqual(10, writer.Cursor);
+        }
     }
 }

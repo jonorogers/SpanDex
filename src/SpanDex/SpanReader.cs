@@ -2,13 +2,21 @@
 using SpanDex.Extensions;
 
 namespace SpanDex {
+    /// <summary>
+    /// Provides an easy way to read from a Span
+    /// </summary>
     public ref struct SpanReader {
         private ReadOnlySpan<byte> span;
         private int cursor;
 
-        public SpanReader(ReadOnlySpan<byte> span) {
+        /// <summary>
+        /// Initializes a SpanReader using the given memory
+        /// </summary>
+        /// <param name="span">The memory to use</param>
+        /// <param name="cursor">Optional initial cursor position (defaults to 0)</param>
+        public SpanReader(ReadOnlySpan<byte> span, int cursor = 0) {
             this.span = span;
-            this.cursor = 0;
+            this.cursor = cursor;
         }
 
         public static implicit operator SpanReader(byte[] array) => new SpanReader(array);
@@ -16,6 +24,9 @@ namespace SpanDex {
         public static implicit operator SpanReader(ReadOnlySpan<byte> span) => new SpanReader(span);
         public static implicit operator SpanReader(ArraySegment<byte> segment) => new SpanReader(segment);
 
+        /// <summary>
+        /// The length of the memory
+        /// </summary>
         public int Length => span.Length;
 
         public short ReadInt16BigEndian() => span.ReadInt16BigEndian(ref cursor);

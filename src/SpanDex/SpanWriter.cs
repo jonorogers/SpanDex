@@ -2,9 +2,19 @@
 using SpanDex.Extensions;
 
 namespace SpanDex {
+    /// <summary>
+    /// Provides an easy way to write to a Span
+    /// </summary>
     public ref struct SpanWriter {
+        /// <summary>
+        /// The underlying span
+        /// </summary>
         public readonly Span<byte> Span;
         private int cursor;
+        /// <summary>
+        /// Initializes a new SpanWriter with the provided size in bytes. 
+        /// </summary>
+        /// <param name="size">The size (in bytes) of the underlying memory</param>
         public SpanWriter(int size) {
             if (size <= 0)
                 throw new ArgumentException("Size must be a non-negative integer");
@@ -12,24 +22,49 @@ namespace SpanDex {
             this.Span = new byte[size];
             this.cursor = 0;
         }
-        public SpanWriter(Span<byte> span) {
+
+        /// <summary>
+        /// Initializes a new SpanWriter using an existing Span of memory
+        /// </summary>
+        /// <param name="span">The memory to use</param>
+        /// <param name="cursor">Optional initial cursor position to use (defaults to 0)</param>
+        public SpanWriter(Span<byte> span, int cursor = 0) {
             if (span.Length == 0)
                 throw new ArgumentNullException(nameof(span));
 
             this.Span = span;
-            this.cursor = 0;
+            this.cursor = cursor;
         }
 
         public static implicit operator SpanWriter(byte[] array) => new SpanWriter(array);
         public static implicit operator SpanWriter(Span<byte> span) => new SpanWriter(span);
         public static implicit operator SpanWriter(ArraySegment<byte> segment) => new SpanWriter(segment);
 
-        public int Written => cursor;
+        /// <summary>
+        /// The current cursor position
+        /// </summary>
+        public int Cursor => cursor;
+        /// <summary>
+        /// The space remaining in the memory
+        /// </summary>
         public int Remaining => Span.Length - cursor;
+        /// <summary>
+        /// The length of the memory
+        /// </summary>
         public int Length => Span.Length;
 
+        /// <summary>
+        /// Returns a byte[] of the memory
+        /// </summary>
         public byte[] ToArray() => Span.ToArray();
+        /// <summary>
+        /// Returns a read only span of the memory
+        /// </summary>
         public ReadOnlySpan<byte> ToReadOnlySpan() => new ReadOnlySpan<byte>(ToArray());
+        /// <summary>
+        /// Advances the cursor by the given length
+        /// </summary>
+        /// <param name="length">The amount (in bytes) to move the cursor</param>
         public void Advance(int length) {
             if (length <= 0)
                 throw new ArgumentException("Length must be a non-negative integer");
