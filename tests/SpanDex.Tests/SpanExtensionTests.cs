@@ -239,6 +239,14 @@ namespace SpanDex.Tests {
             }
         }
         [TestMethod]
+        public void TryReadUInt64LittleEndian_NegativeCursor_ThrowsArgumentException() {
+            Assert.ThrowsException<ArgumentException>(() => {
+                var span = GetSpan(18_378_564_784_564_235_456, Endianness.Little);
+                cursor = -1;
+                span.TryReadUInt64LittleEndian(out ulong value, ref cursor);
+            });
+        }
+        [TestMethod]
         public void TryReadSpan_ReadsCorrectly() {
             ReadOnlySpan<byte> span = new byte[10];
             if(span.TryReadSpan(out var value, 10, ref cursor)) {
@@ -246,6 +254,15 @@ namespace SpanDex.Tests {
                 CollectionAssert.AreEqual(span.ToArray(), value.ToArray());
             } else {
                 Assert.Fail();
+            }
+        }
+        [TestMethod]
+        public void TryReadSpan_IncorrectLength_Fails() {
+            ReadOnlySpan<byte> span = new byte[10];
+            if (span.TryReadSpan(out var value, 20, ref cursor)) {
+                Assert.Fail();
+            } else {
+                Assert.AreEqual(0, cursor);
             }
         }
         [TestMethod]
