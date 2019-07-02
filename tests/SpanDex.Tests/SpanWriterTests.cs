@@ -13,5 +13,16 @@ namespace SpanDex.Tests {
                 var spanWriter = new SpanWriter(null);
             });
         }
+
+        [TestMethod]
+        public void ImplicitConstructors_LengthIsCorrect() {
+            var byteArray = new byte[10];
+            Span<byte> span = new byte[20];
+
+            SpanWriter spanWriter = byteArray;
+            Assert.AreEqual(byteArray.Length, spanWriter.Length);
+            spanWriter = span;
+            Assert.AreEqual(span.Length, spanWriter.Length);
+        }
     }
 }
