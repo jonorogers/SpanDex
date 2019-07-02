@@ -43,6 +43,9 @@ namespace SpanDex {
             return TryAdvance(BinaryPrimitives.TryWriteUInt64LittleEndian(destination.Slice(cursor, 8), value), ref cursor, 8);
         }
         internal static bool TryWriteSpan(Span<byte> destination, ReadOnlySpan<byte> value, ref int cursor) {
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
+
             if (destination.HasSpace(value.Length + cursor)) {
                 WriteSpan(destination, value, ref cursor);
                 return true;
@@ -50,9 +53,15 @@ namespace SpanDex {
             return false;
         }
         internal static bool TryWriteAsciiString(Span<byte> destination, string value, ref int cursor) {
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
+
             return TryWriteSpan(destination, Encoding.ASCII.GetBytes(value), ref cursor);
         }
         internal static bool TryWriteUtf8String(Span<byte> destination, string value, ref int cursor) {
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
+
             return TryWriteSpan(destination, Encoding.UTF8.GetBytes(value), ref cursor);
         }
         internal static void WriteInt16BigEndian(Span<byte> destination, short value, ref int cursor) {
@@ -92,26 +101,36 @@ namespace SpanDex {
             BinaryPrimitives.WriteUInt64LittleEndian(destination.SliceAndAdvance(ref cursor, 8), value);
         }
         internal static void WriteSpan(Span<byte> destination, ReadOnlySpan<byte> value, ref int cursor) {
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
+
             value.CopyTo(destination.Slice(cursor, value.Length));
-            cursor += value.Length;
+            IncrementCursor(ref cursor, value.Length);
         }
         internal static void WriteAsciiString(Span<byte> destination, string value, ref int cursor) {
+            if (value == null) 
+                throw new ArgumentNullException(nameof(value));
+
             WriteSpan(destination, Encoding.ASCII.GetBytes(value), ref cursor);
         }
         internal static void WriteUtf8String(Span<byte> destination, string value, ref int cursor) {
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
+
             WriteSpan(destination, Encoding.UTF8.GetBytes(value), ref cursor);
         }
 
         private static Span<byte> SliceAndAdvance(this Span<byte> source, ref int cursor, int size) {
             Span<byte> slice = source.Slice(cursor, size);
-            cursor += size;
+            IncrementCursor(ref cursor, size);
             return slice;
         }
         private static bool TryAdvance(bool succeeded, ref int cursor, int size) {
             if (succeeded)
-                cursor += size;
+                IncrementCursor(ref cursor, size);
             return succeeded;
         }
+        private static void IncrementCursor(ref int cursor, int size) => cursor = checked(cursor + size);
         private static bool HasSpace(this Span<byte> source, int space) => source.Length >= space;
     }
 }

@@ -91,8 +91,7 @@ namespace SpanDex {
         internal static bool TryReadSpan(ReadOnlySpan<byte> source, out ReadOnlySpan<byte> span, int size, ref int cursor) {
             span = null;
             if (source.HasSpace(size + cursor)) {
-                span = source.Slice(cursor, size);
-                cursor += size;
+                span = ReadSpan(source, size, ref cursor);
                 return true;
             }
             return false;
@@ -115,15 +114,19 @@ namespace SpanDex {
         }
 
         private static ReadOnlySpan<byte> SliceAndAdvance(this ReadOnlySpan<byte> source, ref int cursor, int size) {
+            if (size <= 0)
+                throw new ArgumentException("Size must be a positive integer");
+
             ReadOnlySpan<byte> slice = source.Slice(cursor, size);
-            cursor += size;
+            IncrementCursor(ref cursor, size);
             return slice;
         }
         private static bool TryAdvance(bool succeeded, ref int cursor, int size) {
             if (succeeded)
-                cursor += size;
+                IncrementCursor(ref cursor, size);
             return succeeded;
         }
+        private static void IncrementCursor(ref int cursor, int size) => cursor = checked(cursor + size);
         private static bool HasSpace(this ReadOnlySpan<byte> source, int space) => source.Length >= space;
     }
 }

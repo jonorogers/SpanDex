@@ -3,6 +3,7 @@ using System;
 using SpanDex.Extensions;
 using System.Linq;
 using System.Text;
+using System.Buffers.Binary;
 
 namespace SpanDex.Tests {
     internal enum Endianness {
@@ -13,6 +14,13 @@ namespace SpanDex.Tests {
     public class SpanExtensionTests {
         private int cursor = 0;
 
+        [TestMethod]
+        public void Read_NegativeSize_ThrowsArgumentException() {
+            Assert.ThrowsException<ArgumentException>(() => {
+                ReadOnlySpan<byte> span = new byte[1];
+                span.ReadSpan(-1, ref cursor);
+            });
+        }
         [TestMethod]
         public void ReadInt16BigEndian_ReadsCorrectly() {
             var span = GetSpan((short)-31_971, Endianness.Big);
@@ -541,6 +549,15 @@ namespace SpanDex.Tests {
             CollectionAssert.AreEqual(toWrite, span.ToArray());
         }
         [TestMethod]
+        public void WriteSpan_Null_ThrowsArgumentNullException() {
+            Assert.ThrowsException<ArgumentNullException>(() => {
+                Span<byte> span = new byte[10];
+                byte[] toWrite = null;
+
+                span.WriteSpan(toWrite, ref cursor);
+            });
+        }
+        [TestMethod]
         public void WriteAsciiString_WritesCorrectly() {
             Span<byte> span = new byte[11];
             var toWrite = "test string";
@@ -550,6 +567,24 @@ namespace SpanDex.Tests {
 
             Assert.AreEqual(toWrite.Length, cursor);
             CollectionAssert.AreEqual(encodingArray, span.ToArray());
+        }
+        [TestMethod]
+        public void WriteAsciiString_Null_ThrowsArgumentNullException() {
+            Assert.ThrowsException<ArgumentNullException>(() => {
+                Span<byte> span = new byte[11];
+                string toWrite = null;
+
+                span.WriteAsciiString(toWrite, ref cursor);
+            });
+        }
+        [TestMethod]
+        public void WriteAsciiString_Empty_DoesntThrow() {
+            Span<byte> span = new byte[11];
+            var toWrite = string.Empty;
+
+            span.WriteAsciiString(toWrite, ref cursor);
+
+            Assert.AreEqual(toWrite.Length, cursor);
         }
         [TestMethod]
         public void WriteUT8String_WritesCorrectly() {
@@ -562,7 +597,6 @@ namespace SpanDex.Tests {
             Assert.AreEqual(toWrite.Length, cursor);
             CollectionAssert.AreEqual(encodingArray, span.ToArray());
         }
-
 
 
         private ReadOnlySpan<byte> GetSpan(short value, Endianness endian) => CreateSpan(BitConverter.GetBytes(value), endian);

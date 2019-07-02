@@ -6,9 +6,15 @@ namespace SpanDex {
         private Memory<byte> memory;
         private int cursor = 0;
         public SpanWriter(int size) {
-            memory = new byte[size];
+            if (size <= 0)
+                throw new ArgumentException("Size must be a non-negative integer");
+
+            this.memory = new byte[size];
         }
         public SpanWriter(Memory<byte> memory) {
+            if (memory.Length == 0)
+                throw new ArgumentNullException(nameof(memory));
+
             this.memory = memory;
         }
         public Span<byte> Span => memory.Span;
