@@ -62,7 +62,7 @@ namespace SpanDex {
         /// </summary>
         public ReadOnlySpan<byte> ToReadOnlySpan() => new ReadOnlySpan<byte>(ToArray());
         /// <summary>
-        /// Advances the cursor by the given length
+        /// Manually advances the cursor by the given length
         /// </summary>
         /// <param name="length">The amount (in bytes) to move the cursor</param>
         public void Advance(int length) {

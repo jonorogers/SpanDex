@@ -25,9 +25,27 @@ namespace SpanDex {
         public static implicit operator SpanReader(ArraySegment<byte> segment) => new SpanReader(segment);
 
         /// <summary>
+        /// The current cursor position
+        /// </summary>
+        public int Cursor => cursor;
+        /// <summary>
+        /// The space remaining in the memory
+        /// </summary>
+        public int Remaining => span.Length - cursor;
+        /// <summary>
         /// The length of the memory
         /// </summary>
         public int Length => span.Length;
+        /// <summary>
+        /// Manually advances the cursor by the given length
+        /// </summary>
+        /// <param name="length">The amount (in bytes) to move the cursor</param>
+        public void Advance(int length) {
+            if (length <= 0)
+                throw new ArgumentException("Length must be a non-negative integer");
+
+            cursor = checked(cursor + length);
+        }
 
         public short ReadInt16BigEndian() => span.ReadInt16BigEndian(ref cursor);
         public short ReadInt16LittleEndian() => span.ReadInt16LittleEndian(ref cursor);
