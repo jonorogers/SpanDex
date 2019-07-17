@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SpanDex</name>
+    </assembly>
+    <members>
+        <member name="T:SpanDex.SpanReader">
+            <summary>
+            Provides an easy way to read from a Span
+            </summary>
+        </member>
+        <member name="M:SpanDex.SpanReader.#ctor(System.ReadOnlySpan{System.Byte},System.Int32)">
+            <summary>
+            Initializes a SpanReader using the given memory
+            </summary>
+            <param name="span">The memory to use</param>
+            <param name="cursor">Optional initial cursor position (defaults to 0)</param>
+        </member>
+        <member name="P:SpanDex.SpanReader.Cursor">
+            <summary>
+            The current cursor position
+            </summary>
+        </member>
+        <member name="P:SpanDex.SpanReader.Remaining">
+            <summary>
+            The space remaining in the memory
+            </summary>
+        </member>
+        <member name="P:SpanDex.SpanReader.Length">
+            <summary>
+            The length of the memory
+            </summary>
+        </member>
+        <member name="M:SpanDex.SpanReader.Advance(System.Int32)">
+            <summary>
+            Manually advances the cursor by the given length
+            </summary>
+            <param name="length">The amount (in bytes) to move the cursor</param>
+        </member>
+        <member name="T:SpanDex.SpanWriter">
+            <summary>
+            Provides an easy way to write to a Span
+            </summary>
+        </member>
+        <member name="F:SpanDex.SpanWriter.Span">
+            <summary>
+            The underlying span
+            </summary>
+        </member>
+        <member name="M:SpanDex.SpanWriter.#ctor(System.Int32)">
+            <summary>
+            Initializes a new SpanWriter with the provided size in bytes. 
+            </summary>
+            <param name="size">The size (in bytes) of the underlying memory</param>
+        </member>
+        <member name="M:SpanDex.SpanWriter.#ctor(System.Span{System.Byte},System.Int32)">
+            <summary>
+            Initializes a new SpanWriter using an existing Span of memory
+            </summary>
+            <param name="span">The memory to use</param>
+            <param name="cursor">Optional initial cursor position to use (defaults to 0)</param>
+        </member>
+        <member name="P:SpanDex.SpanWriter.Cursor">
+            <summary>
+            The current cursor position
+            </summary>
+        </member>
+        <member name="P:SpanDex.SpanWriter.Remaining">
+            <summary>
+            The space remaining in the memory
+            </summary>
+        </member>
+        <member name="P:SpanDex.SpanWriter.Length">
+            <summary>
+            The length of the memory
+            </summary>
+        </member>
+        <member name="M:SpanDex.SpanWriter.ToArray">
+            <summary>
+            Returns a byte[] of the memory
+            </summary>
+        </member>
+        <member name="M:SpanDex.SpanWriter.ToReadOnlySpan">
+            <summary>
+            Returns a read only span of the memory
+            </summary>
+        </member>
+        <member name="M:SpanDex.SpanWriter.Advance(System.Int32)">
+            <summary>
+            Manually advances the cursor by the given length
+            </summary>
+            <param name="length">The amount (in bytes) to move the cursor</param>
+        </member>
+    </members>
+</doc>
