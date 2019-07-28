@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpanDex", "src\SpanDex\Span
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpanDex.Example", "example\SpanDex.Example\SpanDex.Example.csproj", "{83A8BDA3-F2AD-4F77-87B9-D6E235952010}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpanDex.Tests", "tests\SpanDex.Tests\SpanDex.Tests.csproj", "{C5398393-4686-40AD-834D-07AEE06617C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpanDex.Tests", "tests\SpanDex.Tests\SpanDex.Tests.csproj", "{C5398393-4686-40AD-834D-07AEE06617C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpanDex.Benchmarking", "SpanDex.Benchmarking\SpanDex.Benchmarking.csproj", "{D9900867-305A-496A-B848-FBD4A01850BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{C5398393-4686-40AD-834D-07AEE06617C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5398393-4686-40AD-834D-07AEE06617C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5398393-4686-40AD-834D-07AEE06617C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9900867-305A-496A-B848-FBD4A01850BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9900867-305A-496A-B848-FBD4A01850BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9900867-305A-496A-B848-FBD4A01850BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9900867-305A-496A-B848-FBD4A01850BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
