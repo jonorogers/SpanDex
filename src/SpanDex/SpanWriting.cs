@@ -4,8 +4,6 @@ using System.Text;
 
 namespace SpanDex {
     internal static class SpanWriting {
-
-
         internal static bool TryWriteInt16BigEndian(Span<byte> destination, short value, ref int cursor) {
             if (!ValidateTryWrite(destination, cursor, 2))
                 return false;
@@ -30,7 +28,6 @@ namespace SpanDex {
         internal static bool TryWriteInt32LittleEndian(Span<byte> destination, int value, ref int cursor) {
             if (!ValidateTryWrite(destination, cursor, 4))
                 return false;
-
 
             return TryAdvance(BinaryPrimitives.TryWriteInt32LittleEndian(destination.Slice(cursor, 4), value), ref cursor, 4);
         }
@@ -93,7 +90,7 @@ namespace SpanDex {
 
         internal static bool TryWriteSpan(Span<byte> destination, ReadOnlySpan<byte> value, ref int cursor) {
             ValidateCursor(cursor);
-            if (value == null)
+            if (value == default)
                 throw new ArgumentNullException(nameof(value));
 
             if (destination.HasSpace(cursor + value.Length)) {
@@ -189,7 +186,7 @@ namespace SpanDex {
 
         internal static void WriteSpan(Span<byte> destination, ReadOnlySpan<byte> value, ref int cursor) {
             ValidateCursor(cursor);
-            if (value == null)
+            if (value == default)
                 throw new ArgumentNullException(nameof(value));
 
             value.CopyTo(destination.Slice(cursor, value.Length));
@@ -198,7 +195,7 @@ namespace SpanDex {
 
         internal static void WriteAsciiString(Span<byte> destination, string value, ref int cursor) {
             ValidateCursor(cursor);
-            if (value == null) 
+            if (value == null)
                 throw new ArgumentNullException(nameof(value));
 
             WriteSpan(destination, Encoding.ASCII.GetBytes(value), ref cursor);

@@ -6,7 +6,6 @@ using System.Text;
 namespace SpanDex.Tests {
     [TestClass]
     public class SpanWriterTests {
-
         [TestMethod]
         public void NullMemory_ThrowsArgumentNullException() {
             Assert.ThrowsException<ArgumentNullException>(() => {

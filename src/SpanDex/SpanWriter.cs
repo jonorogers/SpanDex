@@ -11,6 +11,7 @@ namespace SpanDex {
         /// </summary>
         public readonly Span<byte> Span;
         private int cursor;
+
         /// <summary>
         /// Initializes a new SpanWriter with the provided size in bytes. 
         /// </summary>

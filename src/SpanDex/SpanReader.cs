@@ -6,7 +6,7 @@ namespace SpanDex {
     /// Provides an easy way to read from a Span
     /// </summary>
     public ref struct SpanReader {
-        private ReadOnlySpan<byte> span;
+        private readonly ReadOnlySpan<byte> span;
         private int cursor;
 
         /// <summary>

@@ -5,7 +5,6 @@ using System.Text;
 
 namespace SpanDex {
     internal static class SpanReading {
-
         internal static short ReadInt16BigEndian(ReadOnlySpan<byte> source, ref int cursor) {
             ValidateCursor(cursor);
             return BinaryPrimitives.ReadInt16BigEndian(source.SliceAndAdvance(ref cursor, 2));
