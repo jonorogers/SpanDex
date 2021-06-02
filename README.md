@@ -46,3 +46,25 @@ This lib is based around the `System.Buffers.Binary.BinaryPrimitives` class, wit
 - `span.ReadSpan()` - same as slice, but keeps track of where you're up to
 - `span.ReadASCIIString()` - does what it says on the packet
 - `span.ReadUTF8String()` - I think you get the drift
+
+### Benchmark Results
+
+``` ini
+
+BenchmarkDotNet=v0.11.5, OS=Windows 10.0.19041
+Intel Core i7-9750H CPU 2.60GHz, 1 CPU, 12 logical and 6 physical cores
+.NET Core SDK=5.0.104
+  [Host]     : .NET Core 2.2.8 (CoreCLR 4.6.28207.03, CoreFX 4.6.28208.02), 64bit RyuJIT
+  DefaultJob : .NET Core 2.2.8 (CoreCLR 4.6.28207.03, CoreFX 4.6.28208.02), 64bit RyuJIT
+
+
+```
+|     Method |     N |        Mean |     Error |    StdDev | Rank | Gen 0 | Gen 1 | Gen 2 | Allocated |
+|----------- |------ |------------:|----------:|----------:|-----:|------:|------:|------:|----------:|
+| **SpanReader** |  **1000** |  **1,201.3 ns** |  **22.18 ns** |  **20.75 ns** |    **3** |     **-** |     **-** |     **-** |         **-** |
+| BitConvert |  1000 |    947.9 ns |  18.67 ns |  27.37 ns |    2 |     - |     - |     - |         - |
+|     Manual |  1000 |    553.7 ns |  10.96 ns |  10.77 ns |    1 |     - |     - |     - |         - |
+| **SpanReader** | **10000** | **13,152.5 ns** | **262.35 ns** | **376.25 ns** |    **6** |     **-** |     **-** |     **-** |         **-** |
+| BitConvert | 10000 |  9,786.4 ns | 168.66 ns | 187.47 ns |    5 |     - |     - |     - |         - |
+|     Manual | 10000 |  5,379.4 ns | 107.46 ns | 182.47 ns |    4 |     - |     - |     - |         - |
+
