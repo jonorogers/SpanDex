@@ -6,6 +6,8 @@ using System.Collections.Generic;
 namespace SpanDex.Benchmarking {
     [RankColumn]
     [MemoryDiagnoser]
+    [MarkdownExporterAttribute.Default]
+    [MarkdownExporterAttribute.GitHub]
     public class SpanReaderVsBitConverter {
         private byte[] data;
 
